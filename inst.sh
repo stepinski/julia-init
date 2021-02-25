@@ -5,3 +5,9 @@ git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.8.0
 asdf plugin add julia
 #install julia ver
 asdf install julia 1.5.3
+#set it as global
+asdf global julia 1.5.3
+
+#once in terminal
+#] for pck mode
+#add IJulia
