@@ -11,3 +11,7 @@ asdf global julia 1.5.3
 #once in terminal
 #] for pck mode
 #add IJulia
+#using Pkg
+#Pkg.build("IJulia")
+#to install 1.0 Julia
+sudo snap install julia --classic
