@@ -9,6 +9,9 @@ myphonebook = Dict("Jenny" => "867-5309", "Ghostbusters" => "555-2368")
 myphonebook["Jenny"]
 rand(4,3)
 n=10
+m=10
 for i in 1:n
     println("testing $i")
 end
+
+C=[ i+j for i in 1:n,j in 1:m]
