@@ -12,7 +12,11 @@ function encode(s)
         if c == prevc
             cnt = cnt + 1 
         else
-            codepart=cnt>1 ? string(cnt) : ""
+            # codepart=cnt>1 ? string(cnt) : ""
+            # print(prevc)
+            
+            # print(codepart(cnt,prevc))
+            
             coded = coded * codepart(cnt,prevc)
             # prevc = ""
             cnt = 0
@@ -20,7 +24,7 @@ function encode(s)
         prevc = c   
     end
     
-    return coded
+    return coded*codepart(cnt,prevc)
 end
 
 
