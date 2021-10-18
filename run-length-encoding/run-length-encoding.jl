@@ -4,7 +4,8 @@ function codepart(cnt,prevc)
 end
 
 function encode(s)
-    prevc = s[1]
+    # prevc=s
+    prevc = length(s)>0 ? s[1] : s
     coded = ""
     cnt=0
 
@@ -19,7 +20,7 @@ function encode(s)
             
             coded = coded * codepart(cnt,prevc)
             # prevc = ""
-            cnt = 0
+            cnt = 1
         end 
         prevc = c   
     end
