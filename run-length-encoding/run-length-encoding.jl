@@ -32,7 +32,7 @@ end
 
 
 function decode(s)
-    concat = ""
+    concat = "1"
     decoded = ""
 
     for c in s
@@ -40,13 +40,12 @@ function decode(s)
         
         if isnumb
             # collect new chars as part of number
-            concat = concat * c
+            concat!="1" ? concat = concat * c : concat=c
         else
             cnt = parse(Int64, concat)
-            decoded = decoded + repeat(c, cnt)
-            concat = ""
-
+            decoded = decoded * repeat(c, cnt)
+            concat = "1"
         end    
     end
-    return coded
+    return decoded
 end
