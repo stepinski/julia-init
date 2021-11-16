@@ -1,11 +1,24 @@
 function wordcount(sentence)
+
+    tmp=lowercase(sentence)
+    tmp=replace(tmp, "' "  =>"")
+    tmp=replace(tmp," '" =>"")
+    tmp=replace(tmp,"'" =>"T")
+    words=split(tmp)
+    for w in words
+        tst=replace(w, !isletter =>"")
+        println(tst)
+    end
+end
+function wordcounts(sentence)
     prev = ""
     prevclass = 0
     res = Dict{String,Int32}()
 
-    for c in sentence
+
+    for c in lowercase(sentence)
         
-        if isspace(c)
+        if isspace(c) || c==','
         # separate word
             if length(prev) > 0 
                 tmp = get!(res, prev, 0)
@@ -25,7 +38,7 @@ function wordcount(sentence)
         #         prevclass = 1
         #     end
         
-        elseif isletter(c) || isnumeric(c)
+        elseif isletter(c) || isnumeric(c) || (c==''' && length(prev)>0)
             print(c * " is ascii")
             if prevclass == 0
                 prev = prev * c
