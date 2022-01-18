@@ -52,3 +52,29 @@ A binary search is a dichotomic divide and conquer search algorithm.
 ### Based on
 
 Wikipedia - http://en.wikipedia.org/wiki/Binary_search_algorithm
+
+shall be fixed in branch as in Julia docs:
+Base.Sort.searchsorted
+—
+Function
+searchsorted(a, x; by=<transform>, lt=<comparison>, rev=false)
+Return the range of indices of a which compare as equal to x (using binary search) according to the order specified by the by, lt and rev keywords, assuming that a is already sorted in that order. Return an empty range located at the insertion point if a does not contain values equal to x.
+
+See also: insorted, searchsortedfirst, sort, findall.
+
+Examples
+
+julia> searchsorted([1, 2, 4, 5, 5, 7], 4) # single match
+3:3
+
+julia> searchsorted([1, 2, 4, 5, 5, 7], 5) # multiple matches
+4:5
+
+julia> searchsorted([1, 2, 4, 5, 5, 7], 3) # no match, insert in the middle
+3:2
+
+julia> searchsorted([1, 2, 4, 5, 5, 7], 9) # no match, insert at end
+7:6
+
+julia> searchsorted([1, 2, 4, 5, 5, 7], 0) # no match, insert at start
+1:0
