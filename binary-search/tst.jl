@@ -1,0 +1,5 @@
+a = readline()
+num = readline()
+s = readline()
+numb=split(num)
+print(string(parse(Int32,a)+parse(Int32,numb[1])+parse(Int32,numb[2])) * s)

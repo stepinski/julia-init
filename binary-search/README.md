@@ -39,26 +39,14 @@ A binary search halves the number of items to check with each iteration,
 so locating an item (or determining its absence) takes logarithmic time.
 A binary search is a dichotomic divide and conquer search algorithm.
 
-## Source
+Expected output as function searchsorted in Julia: 
 
-### Created by
-
-- @SaschaMann
-
-### Contributed to by
-
-- @tomerarnon
-
-### Based on
-
-Wikipedia - http://en.wikipedia.org/wiki/Binary_search_algorithm
-
-shall be fixed in branch as in Julia docs:
-Base.Sort.searchsorted
-—
 Function
 searchsorted(a, x; by=<transform>, lt=<comparison>, rev=false)
-Return the range of indices of a which compare as equal to x (using binary search) according to the order specified by the by, lt and rev keywords, assuming that a is already sorted in that order. Return an empty range located at the insertion point if a does not contain values equal to x.
+Return the range of indices of a which compare as equal to x (using binary search) 
+according to the order specified by the by, lt and rev keywords, 
+assuming that a is already sorted in that order. 
+Return an empty range located at the insertion point if a does not contain values equal to x.
 
 See also: insorted, searchsortedfirst, sort, findall.
 
@@ -78,3 +66,18 @@ julia> searchsorted([1, 2, 4, 5, 5, 7], 9) # no match, insert at end
 
 julia> searchsorted([1, 2, 4, 5, 5, 7], 0) # no match, insert at start
 1:0
+
+## Source
+
+### Created by
+
+- @SaschaMann
+
+### Contributed to by
+
+- @tomerarnon
+
+### Based on
+
+Wikipedia - http://en.wikipedia.org/wiki/Binary_search_algorithm
+Julia docs - https://docs.julialang.org/en/v1/base/sort/
