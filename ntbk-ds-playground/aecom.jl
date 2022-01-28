@@ -1,5 +1,5 @@
 ### A Pluto.jl notebook ###
-# v0.17.5
+# v0.17.3
 
 using Markdown
 using InteractiveUtils
@@ -41,14 +41,29 @@ md"""
  - Fort his purpose I will try sktime approach
 """
 
-# ╔═╡ e826c57f-53b5-4f9f-b01f-39b1f5241381
+# ╔═╡ 922b5b87-6edf-4ed4-8c5c-f473d190ea0a
+first(velocity.time)
 
+# ╔═╡ d96a36aa-cc32-4b45-acc4-4d55326e9b7c
+function resample(df,delta)
+	time=sort(df.time)
+	idx = first(time):delta:last(time);
+	df_full = DataFrame(time = idx);
+	leftjoin(df_full, df, on ="time")
+end
+
+# ╔═╡ aac0071c-f42b-46e1-8800-7a00ee5f500f
+res=resample(velocity,Minute(5))
+
+# ╔═╡ e826c57f-53b5-4f9f-b01f-39b1f5241381
+#it's dedoup on time columh - it's not needed since we do resampling differently
+#res2=unique(res,:time)
 
 # ╔═╡ 6ed93b66-654e-4224-96ea-0eacc18bc8a0
 begin
 	scipy_stats = pyimport("scipy.stats")
-	@show scipy_stats.spearmanr(df.time,df.value)
-	@show scipy_stats.pearsonr(df.time,df.value)
+	#@show scipy_stats.spearmanr(df.time,df.value)
+	#@show scipy_stats.pearsonr(df.time,df.value)
 end
 
 # ╔═╡ d6883950-2f3d-4a79-b9a9-342fee2c8548
@@ -414,6 +429,9 @@ uuid = "3f19e933-33d8-53b3-aaab-bd5110c3b7a0"
 # ╠═16a05827-e15a-49ac-bbf5-5b27cc51edac
 # ╠═57c68391-a3aa-4b0c-b06e-dac79f537032
 # ╠═095f0a5d-b2b0-4c9b-9161-0ff1e583242c
+# ╠═922b5b87-6edf-4ed4-8c5c-f473d190ea0a
+# ╠═d96a36aa-cc32-4b45-acc4-4d55326e9b7c
+# ╠═aac0071c-f42b-46e1-8800-7a00ee5f500f
 # ╠═e826c57f-53b5-4f9f-b01f-39b1f5241381
 # ╠═6ed93b66-654e-4224-96ea-0eacc18bc8a0
 # ╠═d6883950-2f3d-4a79-b9a9-342fee2c8548
