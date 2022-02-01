@@ -1,5 +1,5 @@
 ### A Pluto.jl notebook ###
-# v0.17.5
+# v0.17.3
 
 using Markdown
 using InteractiveUtils
@@ -50,15 +50,6 @@ begin
 	@show scipy_stats.spearmanr(df.time,df.value)
 	@show scipy_stats.pearsonr(df.time,df.value)
 end
-
-# ╔═╡ d6883950-2f3d-4a79-b9a9-342fee2c8548
-
-
-# ╔═╡ e3cfdc65-fbb1-4021-8672-1b494c56237f
-
-
-# ╔═╡ 17a4f704-8a18-4f90-bb87-3b0ce480bc21
-
 
 # ╔═╡ 00000000-0000-0000-0000-000000000001
 PLUTO_PROJECT_TOML_CONTENTS = """
@@ -416,8 +407,5 @@ uuid = "3f19e933-33d8-53b3-aaab-bd5110c3b7a0"
 # ╠═095f0a5d-b2b0-4c9b-9161-0ff1e583242c
 # ╠═e826c57f-53b5-4f9f-b01f-39b1f5241381
 # ╠═6ed93b66-654e-4224-96ea-0eacc18bc8a0
-# ╠═d6883950-2f3d-4a79-b9a9-342fee2c8548
-# ╠═e3cfdc65-fbb1-4021-8672-1b494c56237f
-# ╠═17a4f704-8a18-4f90-bb87-3b0ce480bc21
 # ╟─00000000-0000-0000-0000-000000000001
 # ╟─00000000-0000-0000-0000-000000000002
