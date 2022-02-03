@@ -4,6 +4,9 @@
 using Markdown
 using InteractiveUtils
 
+# ╔═╡ d971d257-05b4-4b9c-9cc7-1a177927cadc
+import Pkg; Pkg.build("Plots")
+
 # ╔═╡ e6e38ce5-a93c-4788-bff1-3259839ab3b7
 begin
 using DataFrames
@@ -76,16 +79,37 @@ end
 # ╔═╡ 54c1aa1a-e0f3-4747-a9d8-82ab35e114ef
 plot(res.time, res.value)
 
-# ╔═╡ 064e6d65-21df-4b61-b01b-748602f770c8
-
-
-# ╔═╡ 8e041e96-6d4e-43f1-b014-61f96c2f3680
-
-
-# ╔═╡ 1e8482b8-c06d-4e1c-907d-3d7ce329688b
-
+# ╔═╡ 4e5c43ce-ef1d-4029-83d3-eadbc10db19c
+first(res,20)
 
 # ╔═╡ 08f78d80-a827-4222-8c7e-e01d1817fbf9
+begin
+	pd = pyimport("pandas")
+	tselect = pyimport("sktime.forecasting.model_selection")
+	#from sktime.forecasting.model_selection import temporal_train_test_split
+	#@show scipy_stats.spearmanr(df.time,df.value)
+	#@show scipy_stats.pearsonr(df.time,df.value)
+end
+
+# ╔═╡ 2064872a-59da-4f70-a463-6650b88c2f02
+dfjpy = pd.DataFrame(res)
+
+# ╔═╡ f4a2b3bd-df18-4d4b-abb9-40addf798f96
+
+
+# ╔═╡ b2bdaf50-6fc1-4fd7-88ff-63985c44eef1
+
+
+# ╔═╡ 77703302-f690-4e1c-bff2-101ae4d71160
+
+
+# ╔═╡ c0f7bfb9-8e1b-4c5a-ab60-64452db8061a
+size(res)
+
+# ╔═╡ 90a24d40-ecf3-428e-a840-9363ec414744
+ytrain,ytest = tselect.temporal_train_test_split(first(res,20),test_size=10)
+
+# ╔═╡ d888f6ac-d188-47c8-886a-2ca4e70a8ae9
 
 
 # ╔═╡ ea928288-03fd-41e0-aa3c-3d00d41d7bea
@@ -104,6 +128,7 @@ BenchmarkTools = "6e4b80f9-dd63-53aa-95a3-0cdb28fa8baf"
 CSV = "336ed68f-0bac-5ca0-87d4-7b16caf5d00b"
 DataFrames = "a93c6f00-e57d-5684-b7b6-d8193f3e46c0"
 Dates = "ade2ca70-3891-5945-98fb-dc099432e06a"
+Pkg = "44cfe95a-1eb2-52ea-b672-e2afdf69b78f"
 Plots = "91a5bcdd-55d7-5caf-9e0b-520d859cae80"
 PyCall = "438e738f-606a-5dbb-bf0a-cddfbfd45ab0"
 
@@ -1087,13 +1112,19 @@ version = "0.9.1+5"
 # ╠═d96a36aa-cc32-4b45-acc4-4d55326e9b7c
 # ╠═aac0071c-f42b-46e1-8800-7a00ee5f500f
 # ╠═e826c57f-53b5-4f9f-b01f-39b1f5241381
+# ╠═d971d257-05b4-4b9c-9cc7-1a177927cadc
 # ╠═6ed93b66-654e-4224-96ea-0eacc18bc8a0
 # ╠═d6883950-2f3d-4a79-b9a9-342fee2c8548
 # ╠═54c1aa1a-e0f3-4747-a9d8-82ab35e114ef
-# ╠═064e6d65-21df-4b61-b01b-748602f770c8
-# ╠═8e041e96-6d4e-43f1-b014-61f96c2f3680
-# ╠═1e8482b8-c06d-4e1c-907d-3d7ce329688b
+# ╠═4e5c43ce-ef1d-4029-83d3-eadbc10db19c
 # ╠═08f78d80-a827-4222-8c7e-e01d1817fbf9
+# ╠═2064872a-59da-4f70-a463-6650b88c2f02
+# ╠═f4a2b3bd-df18-4d4b-abb9-40addf798f96
+# ╠═b2bdaf50-6fc1-4fd7-88ff-63985c44eef1
+# ╠═77703302-f690-4e1c-bff2-101ae4d71160
+# ╠═c0f7bfb9-8e1b-4c5a-ab60-64452db8061a
+# ╠═90a24d40-ecf3-428e-a840-9363ec414744
+# ╠═d888f6ac-d188-47c8-886a-2ca4e70a8ae9
 # ╠═ea928288-03fd-41e0-aa3c-3d00d41d7bea
 # ╠═e3cfdc65-fbb1-4021-8672-1b494c56237f
 # ╠═17a4f704-8a18-4f90-bb87-3b0ce480bc21
