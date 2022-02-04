@@ -80,7 +80,10 @@ end
 plot(res.time, res.value)
 
 # ╔═╡ 4e5c43ce-ef1d-4029-83d3-eadbc10db19c
-first(res,20)
+replace!(res.value, missing => Nothing);
+
+# ╔═╡ 518023a0-6a3d-491d-b80b-9db4ea60ed37
+df = DataFrame(A=1:4, B=["M", "F", "F", "M"])
 
 # ╔═╡ 08f78d80-a827-4222-8c7e-e01d1817fbf9
 begin
@@ -91,17 +94,11 @@ begin
 	#@show scipy_stats.pearsonr(df.time,df.value)
 end
 
+# ╔═╡ c56103a0-3c4e-4ae7-99b8-e656aa69b5b5
+pdf=pd.DataFrame(Matrix(df))
+
 # ╔═╡ 2064872a-59da-4f70-a463-6650b88c2f02
-dfjpy = pd.DataFrame(res)
-
-# ╔═╡ f4a2b3bd-df18-4d4b-abb9-40addf798f96
-
-
-# ╔═╡ b2bdaf50-6fc1-4fd7-88ff-63985c44eef1
-
-
-# ╔═╡ 77703302-f690-4e1c-bff2-101ae4d71160
-
+tst=pd.DataFrame(Matrix(res))
 
 # ╔═╡ c0f7bfb9-8e1b-4c5a-ab60-64452db8061a
 size(res)
@@ -1117,11 +1114,10 @@ version = "0.9.1+5"
 # ╠═d6883950-2f3d-4a79-b9a9-342fee2c8548
 # ╠═54c1aa1a-e0f3-4747-a9d8-82ab35e114ef
 # ╠═4e5c43ce-ef1d-4029-83d3-eadbc10db19c
+# ╠═518023a0-6a3d-491d-b80b-9db4ea60ed37
+# ╠═c56103a0-3c4e-4ae7-99b8-e656aa69b5b5
 # ╠═08f78d80-a827-4222-8c7e-e01d1817fbf9
 # ╠═2064872a-59da-4f70-a463-6650b88c2f02
-# ╠═f4a2b3bd-df18-4d4b-abb9-40addf798f96
-# ╠═b2bdaf50-6fc1-4fd7-88ff-63985c44eef1
-# ╠═77703302-f690-4e1c-bff2-101ae4d71160
 # ╠═c0f7bfb9-8e1b-4c5a-ab60-64452db8061a
 # ╠═90a24d40-ecf3-428e-a840-9363ec414744
 # ╠═d888f6ac-d188-47c8-886a-2ca4e70a8ae9
