@@ -80,7 +80,7 @@ end
 plot(res.time, res.value)
 
 # ╔═╡ 4e5c43ce-ef1d-4029-83d3-eadbc10db19c
-replace!(res.value, missing => Nothing);
+replace!(res.value, missing => 0);
 
 # ╔═╡ 518023a0-6a3d-491d-b80b-9db4ea60ed37
 df = DataFrame(A=1:4, B=["M", "F", "F", "M"])
@@ -104,13 +104,13 @@ tst=pd.DataFrame(Matrix(res))
 size(res)
 
 # ╔═╡ 90a24d40-ecf3-428e-a840-9363ec414744
-ytrain,ytest = tselect.temporal_train_test_split(first(res,20),test_size=10)
+ytrain,ytest = tselect.temporal_train_test_split(Matrix(res),test_size=8000)
 
 # ╔═╡ d888f6ac-d188-47c8-886a-2ca4e70a8ae9
-
+plot(ytrain[:,1],ytrain[:,2])
 
 # ╔═╡ ea928288-03fd-41e0-aa3c-3d00d41d7bea
-
+plot(ytest[:,1],ytest[:,2])
 
 # ╔═╡ e3cfdc65-fbb1-4021-8672-1b494c56237f
 
