@@ -89,6 +89,8 @@ df = DataFrame(A=1:4, B=["M", "F", "F", "M"])
 begin
 	pd = pyimport("pandas")
 	tselect = pyimport("sktime.forecasting.model_selection")
+	naivemodel = pyimport("sktime.forecasting.naive")
+	fbase = pyimport("sktime.forecasting.base")
 	#from sktime.forecasting.model_selection import temporal_train_test_split
 	#@show scipy_stats.spearmanr(df.time,df.value)
 	#@show scipy_stats.pearsonr(df.time,df.value)
@@ -112,11 +114,20 @@ plot(ytrain[:,1],ytrain[:,2])
 # ╔═╡ ea928288-03fd-41e0-aa3c-3d00d41d7bea
 plot(ytest[:,1],ytest[:,2])
 
-# ╔═╡ e3cfdc65-fbb1-4021-8672-1b494c56237f
+# ╔═╡ 89da4924-32f0-4206-b6b8-1be92e691c24
+idx= ytest |> eachindex |> collect
 
+# ╔═╡ 6b000309-7fe4-4c56-93d3-c88a6b9bda46
+ fh=fbase.ForecastingHorizon(idx, is_relative=false)
+
+# ╔═╡ e3cfdc65-fbb1-4021-8672-1b494c56237f
+forecast_model = naivemodel.NaiveForecaster(strategy="last", sp=12)
 
 # ╔═╡ 17a4f704-8a18-4f90-bb87-3b0ce480bc21
+forecast_model.fit(pd.DataFrame(ytrain))
 
+# ╔═╡ 547ea00d-5794-4fda-9aac-0ff4ad249a53
+y_pred = forecast_model.predict(fh)
 
 # ╔═╡ 00000000-0000-0000-0000-000000000001
 PLUTO_PROJECT_TOML_CONTENTS = """
@@ -1122,7 +1133,10 @@ version = "0.9.1+5"
 # ╠═90a24d40-ecf3-428e-a840-9363ec414744
 # ╠═d888f6ac-d188-47c8-886a-2ca4e70a8ae9
 # ╠═ea928288-03fd-41e0-aa3c-3d00d41d7bea
+# ╠═89da4924-32f0-4206-b6b8-1be92e691c24
+# ╠═6b000309-7fe4-4c56-93d3-c88a6b9bda46
 # ╠═e3cfdc65-fbb1-4021-8672-1b494c56237f
 # ╠═17a4f704-8a18-4f90-bb87-3b0ce480bc21
+# ╠═547ea00d-5794-4fda-9aac-0ff4ad249a53
 # ╟─00000000-0000-0000-0000-000000000001
 # ╟─00000000-0000-0000-0000-000000000002
