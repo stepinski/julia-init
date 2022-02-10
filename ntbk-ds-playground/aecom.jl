@@ -123,8 +123,14 @@ idx= ytest |> eachindex |> collect
 # ╔═╡ e3cfdc65-fbb1-4021-8672-1b494c56237f
 forecast_model = naivemodel.NaiveForecaster(strategy="last", sp=12)
 
+# ╔═╡ b77b7c91-e059-4818-8137-3f72775cbbca
+idxt= ytrain |> eachindex |> collect
+
+# ╔═╡ b539bab6-ef93-49b1-abf5-e8218f49f79b
+trainds=[idxt,ytrain[:,2]]
+
 # ╔═╡ 17a4f704-8a18-4f90-bb87-3b0ce480bc21
-forecast_model.fit(pd.DataFrame(ytrain))
+forecast_model.fit(pd.DataFrame(trainds))
 
 # ╔═╡ 547ea00d-5794-4fda-9aac-0ff4ad249a53
 y_pred = forecast_model.predict(fh)
@@ -1136,6 +1142,8 @@ version = "0.9.1+5"
 # ╠═89da4924-32f0-4206-b6b8-1be92e691c24
 # ╠═6b000309-7fe4-4c56-93d3-c88a6b9bda46
 # ╠═e3cfdc65-fbb1-4021-8672-1b494c56237f
+# ╠═b77b7c91-e059-4818-8137-3f72775cbbca
+# ╠═b539bab6-ef93-49b1-abf5-e8218f49f79b
 # ╠═17a4f704-8a18-4f90-bb87-3b0ce480bc21
 # ╠═547ea00d-5794-4fda-9aac-0ff4ad249a53
 # ╟─00000000-0000-0000-0000-000000000001
