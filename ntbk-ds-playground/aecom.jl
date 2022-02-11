@@ -91,6 +91,7 @@ begin
 	tselect = pyimport("sktime.forecasting.model_selection")
 	naivemodel = pyimport("sktime.forecasting.naive")
 	fbase = pyimport("sktime.forecasting.base")
+	np = pyimport("numpy")
 	#from sktime.forecasting.model_selection import temporal_train_test_split
 	#@show scipy_stats.spearmanr(df.time,df.value)
 	#@show scipy_stats.pearsonr(df.time,df.value)
@@ -118,10 +119,16 @@ plot(ytest[:,1],ytest[:,2])
 idx= ytest |> eachindex |> collect
 
 # ╔═╡ 6b000309-7fe4-4c56-93d3-c88a6b9bda46
- fh=fbase.ForecastingHorizon(idx, is_relative=false)
+ fhold=fbase.ForecastingHorizon(idx, is_relative=false)
+
+# ╔═╡ e1c7b8f5-c105-4565-9705-e41a428a4efd
+fh = np.array([2, 5])
 
 # ╔═╡ e3cfdc65-fbb1-4021-8672-1b494c56237f
 forecast_model = naivemodel.NaiveForecaster(strategy="last", sp=12)
+
+# ╔═╡ 4340d196-3c7e-4111-8044-0c12b98cbda7
+
 
 # ╔═╡ b77b7c91-e059-4818-8137-3f72775cbbca
 idxt= ytrain |> eachindex |> collect
@@ -129,11 +136,20 @@ idxt= ytrain |> eachindex |> collect
 # ╔═╡ b539bab6-ef93-49b1-abf5-e8218f49f79b
 trainds=[idxt,ytrain[:,2]]
 
+# ╔═╡ a71fb8e6-b8d1-42e1-86aa-c0a8752e4fdf
+trainds
+
 # ╔═╡ 17a4f704-8a18-4f90-bb87-3b0ce480bc21
-forecast_model.fit(pd.DataFrame(trainds))
+forecast_model.fit(pd.DataFrame(ytrain))
+
+# ╔═╡ 307f7d06-1539-4a41-8f7b-f9ab56a2ab54
+
 
 # ╔═╡ 547ea00d-5794-4fda-9aac-0ff4ad249a53
 y_pred = forecast_model.predict(fh)
+
+# ╔═╡ 414fddee-2599-4517-a961-069afaece0c9
+fh
 
 # ╔═╡ 00000000-0000-0000-0000-000000000001
 PLUTO_PROJECT_TOML_CONTENTS = """
@@ -1141,10 +1157,15 @@ version = "0.9.1+5"
 # ╠═ea928288-03fd-41e0-aa3c-3d00d41d7bea
 # ╠═89da4924-32f0-4206-b6b8-1be92e691c24
 # ╠═6b000309-7fe4-4c56-93d3-c88a6b9bda46
+# ╠═e1c7b8f5-c105-4565-9705-e41a428a4efd
 # ╠═e3cfdc65-fbb1-4021-8672-1b494c56237f
+# ╠═4340d196-3c7e-4111-8044-0c12b98cbda7
 # ╠═b77b7c91-e059-4818-8137-3f72775cbbca
 # ╠═b539bab6-ef93-49b1-abf5-e8218f49f79b
+# ╠═a71fb8e6-b8d1-42e1-86aa-c0a8752e4fdf
 # ╠═17a4f704-8a18-4f90-bb87-3b0ce480bc21
+# ╠═307f7d06-1539-4a41-8f7b-f9ab56a2ab54
 # ╠═547ea00d-5794-4fda-9aac-0ff4ad249a53
+# ╠═414fddee-2599-4517-a961-069afaece0c9
 # ╟─00000000-0000-0000-0000-000000000001
 # ╟─00000000-0000-0000-0000-000000000002
