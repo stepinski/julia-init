@@ -101,16 +101,52 @@ end
 pdf=pd.DataFrame(Matrix(df))
 
 # ╔═╡ 2064872a-59da-4f70-a463-6650b88c2f02
-tst=pd.DataFrame(Matrix(res))
+tst=pd.DataFrame(res.time,res.value).squeeze()
 
 # ╔═╡ c0f7bfb9-8e1b-4c5a-ab60-64452db8061a
 size(res)
 
 # ╔═╡ 90a24d40-ecf3-428e-a840-9363ec414744
-ytrain,ytest = tselect.temporal_train_test_split(Matrix(res),test_size=8000)
+ytrain,ytest = tselect.temporal_train_test_split(tst,test_size=8000)
 
-# ╔═╡ d888f6ac-d188-47c8-886a-2ca4e70a8ae9
-plot(ytrain[:,1],ytrain[:,2])
+# ╔═╡ 365f5b63-59d7-40d6-a9e9-6304ddbc95f2
+
+
+# ╔═╡ 19c3a3a7-fe53-4442-803d-fae21b9cc739
+
+
+# ╔═╡ 60a6cf82-b890-430d-aa35-9099aea9dc98
+
+
+# ╔═╡ 004ccc1c-ff56-4dbf-8bcc-9199e8825d9a
+
+
+# ╔═╡ 53f8c47b-bf91-4bad-ac7c-c1e59efe6c41
+
+
+# ╔═╡ a647f35c-33ae-49e5-ad77-b3e0ed4aada7
+
+
+# ╔═╡ 50f294b9-7579-4598-a2de-62091fc1fa96
+
+
+# ╔═╡ e14973db-c253-45fc-9ed8-08830da27697
+
+
+# ╔═╡ 62d83823-3ef3-4818-b585-150dad751328
+
+
+# ╔═╡ a224e42f-aebc-431a-b1b3-b92b7abd5b45
+
+
+# ╔═╡ 49fca13e-6d45-446b-a39a-4dfaffae149f
+
+
+# ╔═╡ 3e7bfd95-acbe-41f9-9341-1d9a4fbc975f
+
+
+# ╔═╡ a2ffca05-a3de-42b4-a676-7e69e72d2daf
+
 
 # ╔═╡ ea928288-03fd-41e0-aa3c-3d00d41d7bea
 plot(ytest[:,1],ytest[:,2])
@@ -1153,7 +1189,19 @@ version = "0.9.1+5"
 # ╠═2064872a-59da-4f70-a463-6650b88c2f02
 # ╠═c0f7bfb9-8e1b-4c5a-ab60-64452db8061a
 # ╠═90a24d40-ecf3-428e-a840-9363ec414744
-# ╠═d888f6ac-d188-47c8-886a-2ca4e70a8ae9
+# ╠═365f5b63-59d7-40d6-a9e9-6304ddbc95f2
+# ╠═19c3a3a7-fe53-4442-803d-fae21b9cc739
+# ╠═60a6cf82-b890-430d-aa35-9099aea9dc98
+# ╠═004ccc1c-ff56-4dbf-8bcc-9199e8825d9a
+# ╠═53f8c47b-bf91-4bad-ac7c-c1e59efe6c41
+# ╠═a647f35c-33ae-49e5-ad77-b3e0ed4aada7
+# ╠═50f294b9-7579-4598-a2de-62091fc1fa96
+# ╠═e14973db-c253-45fc-9ed8-08830da27697
+# ╠═62d83823-3ef3-4818-b585-150dad751328
+# ╠═a224e42f-aebc-431a-b1b3-b92b7abd5b45
+# ╠═49fca13e-6d45-446b-a39a-4dfaffae149f
+# ╠═3e7bfd95-acbe-41f9-9341-1d9a4fbc975f
+# ╠═a2ffca05-a3de-42b4-a676-7e69e72d2daf
 # ╠═ea928288-03fd-41e0-aa3c-3d00d41d7bea
 # ╠═89da4924-32f0-4206-b6b8-1be92e691c24
 # ╠═6b000309-7fe4-4c56-93d3-c88a6b9bda46
