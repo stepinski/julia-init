@@ -101,88 +101,40 @@ end
 pdf=pd.DataFrame(Matrix(df))
 
 # ╔═╡ 2064872a-59da-4f70-a463-6650b88c2f02
-tst=pd.DataFrame(res.time,res.value).squeeze()
-
-# ╔═╡ c0f7bfb9-8e1b-4c5a-ab60-64452db8061a
-size(res)
+tst=pd.DataFrame(res.value,res.time).squeeze()
 
 # ╔═╡ 90a24d40-ecf3-428e-a840-9363ec414744
 ytrain,ytest = tselect.temporal_train_test_split(tst,test_size=8000)
 
-# ╔═╡ 365f5b63-59d7-40d6-a9e9-6304ddbc95f2
-
-
-# ╔═╡ 19c3a3a7-fe53-4442-803d-fae21b9cc739
-
-
-# ╔═╡ 60a6cf82-b890-430d-aa35-9099aea9dc98
-
-
-# ╔═╡ 004ccc1c-ff56-4dbf-8bcc-9199e8825d9a
-
-
-# ╔═╡ 53f8c47b-bf91-4bad-ac7c-c1e59efe6c41
-
-
-# ╔═╡ a647f35c-33ae-49e5-ad77-b3e0ed4aada7
-
-
-# ╔═╡ 50f294b9-7579-4598-a2de-62091fc1fa96
-
-
-# ╔═╡ e14973db-c253-45fc-9ed8-08830da27697
-
-
-# ╔═╡ 62d83823-3ef3-4818-b585-150dad751328
-
-
-# ╔═╡ a224e42f-aebc-431a-b1b3-b92b7abd5b45
-
-
-# ╔═╡ 49fca13e-6d45-446b-a39a-4dfaffae149f
-
-
-# ╔═╡ 3e7bfd95-acbe-41f9-9341-1d9a4fbc975f
-
-
-# ╔═╡ a2ffca05-a3de-42b4-a676-7e69e72d2daf
-
-
-# ╔═╡ ea928288-03fd-41e0-aa3c-3d00d41d7bea
-plot(ytest[:,1],ytest[:,2])
-
 # ╔═╡ 89da4924-32f0-4206-b6b8-1be92e691c24
 idx= ytest |> eachindex |> collect
 
-# ╔═╡ 6b000309-7fe4-4c56-93d3-c88a6b9bda46
- fhold=fbase.ForecastingHorizon(idx, is_relative=false)
+# ╔═╡ 47c63d97-4286-4192-aee7-eff7d02ae522
+ytest
 
-# ╔═╡ e1c7b8f5-c105-4565-9705-e41a428a4efd
-fh = np.array([2, 5])
+# ╔═╡ 6b000309-7fe4-4c56-93d3-c88a6b9bda46
+ fhold=fbase.ForecastingHorizon(ytest.index.to_period(freq="5Min"), is_relative=false)
+
+# ╔═╡ 3ddd863e-b821-44ef-aa56-54ec5f7f8410
+fhold.to_relative(cutoff=ytrain.index[-1])
+
+# ╔═╡ 01beb782-41af-4457-b53e-e0a166017136
+
 
 # ╔═╡ e3cfdc65-fbb1-4021-8672-1b494c56237f
 forecast_model = naivemodel.NaiveForecaster(strategy="last", sp=12)
 
-# ╔═╡ 4340d196-3c7e-4111-8044-0c12b98cbda7
-
-
-# ╔═╡ b77b7c91-e059-4818-8137-3f72775cbbca
-idxt= ytrain |> eachindex |> collect
-
-# ╔═╡ b539bab6-ef93-49b1-abf5-e8218f49f79b
-trainds=[idxt,ytrain[:,2]]
-
-# ╔═╡ a71fb8e6-b8d1-42e1-86aa-c0a8752e4fdf
-trainds
-
 # ╔═╡ 17a4f704-8a18-4f90-bb87-3b0ce480bc21
-forecast_model.fit(pd.DataFrame(ytrain))
-
-# ╔═╡ 307f7d06-1539-4a41-8f7b-f9ab56a2ab54
-
+forecast_model.fit(ytrain)
 
 # ╔═╡ 547ea00d-5794-4fda-9aac-0ff4ad249a53
-y_pred = forecast_model.predict(fh)
+y_pred = forecast_model.predict(fhold)
+
+# ╔═╡ 98e0f1a4-62eb-4371-8349-370f531e9dfd
+
+
+# ╔═╡ 97469764-b8ce-4969-9301-bb5f638b5588
+
 
 # ╔═╡ 414fddee-2599-4517-a961-069afaece0c9
 fh
@@ -1187,33 +1139,17 @@ version = "0.9.1+5"
 # ╠═c56103a0-3c4e-4ae7-99b8-e656aa69b5b5
 # ╠═08f78d80-a827-4222-8c7e-e01d1817fbf9
 # ╠═2064872a-59da-4f70-a463-6650b88c2f02
-# ╠═c0f7bfb9-8e1b-4c5a-ab60-64452db8061a
 # ╠═90a24d40-ecf3-428e-a840-9363ec414744
-# ╠═365f5b63-59d7-40d6-a9e9-6304ddbc95f2
-# ╠═19c3a3a7-fe53-4442-803d-fae21b9cc739
-# ╠═60a6cf82-b890-430d-aa35-9099aea9dc98
-# ╠═004ccc1c-ff56-4dbf-8bcc-9199e8825d9a
-# ╠═53f8c47b-bf91-4bad-ac7c-c1e59efe6c41
-# ╠═a647f35c-33ae-49e5-ad77-b3e0ed4aada7
-# ╠═50f294b9-7579-4598-a2de-62091fc1fa96
-# ╠═e14973db-c253-45fc-9ed8-08830da27697
-# ╠═62d83823-3ef3-4818-b585-150dad751328
-# ╠═a224e42f-aebc-431a-b1b3-b92b7abd5b45
-# ╠═49fca13e-6d45-446b-a39a-4dfaffae149f
-# ╠═3e7bfd95-acbe-41f9-9341-1d9a4fbc975f
-# ╠═a2ffca05-a3de-42b4-a676-7e69e72d2daf
-# ╠═ea928288-03fd-41e0-aa3c-3d00d41d7bea
 # ╠═89da4924-32f0-4206-b6b8-1be92e691c24
+# ╠═47c63d97-4286-4192-aee7-eff7d02ae522
 # ╠═6b000309-7fe4-4c56-93d3-c88a6b9bda46
-# ╠═e1c7b8f5-c105-4565-9705-e41a428a4efd
+# ╠═3ddd863e-b821-44ef-aa56-54ec5f7f8410
+# ╠═01beb782-41af-4457-b53e-e0a166017136
 # ╠═e3cfdc65-fbb1-4021-8672-1b494c56237f
-# ╠═4340d196-3c7e-4111-8044-0c12b98cbda7
-# ╠═b77b7c91-e059-4818-8137-3f72775cbbca
-# ╠═b539bab6-ef93-49b1-abf5-e8218f49f79b
-# ╠═a71fb8e6-b8d1-42e1-86aa-c0a8752e4fdf
 # ╠═17a4f704-8a18-4f90-bb87-3b0ce480bc21
-# ╠═307f7d06-1539-4a41-8f7b-f9ab56a2ab54
 # ╠═547ea00d-5794-4fda-9aac-0ff4ad249a53
+# ╠═98e0f1a4-62eb-4371-8349-370f531e9dfd
+# ╠═97469764-b8ce-4969-9301-bb5f638b5588
 # ╠═414fddee-2599-4517-a961-069afaece0c9
 # ╟─00000000-0000-0000-0000-000000000001
 # ╟─00000000-0000-0000-0000-000000000002
