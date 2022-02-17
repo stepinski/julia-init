@@ -101,25 +101,14 @@ end
 pdf=pd.DataFrame(Matrix(df))
 
 # ╔═╡ 2064872a-59da-4f70-a463-6650b88c2f02
-tst=pd.DataFrame(res.value,res.time).squeeze()
+tst=pd.DataFrame(res.value,res.time).asfreq("5Min").squeeze().sort_index()
 
 # ╔═╡ 90a24d40-ecf3-428e-a840-9363ec414744
 ytrain,ytest = tselect.temporal_train_test_split(tst,test_size=8000)
 
-# ╔═╡ 89da4924-32f0-4206-b6b8-1be92e691c24
-idx= ytest |> eachindex |> collect
-
-# ╔═╡ 47c63d97-4286-4192-aee7-eff7d02ae522
-ytest
-
 # ╔═╡ 6b000309-7fe4-4c56-93d3-c88a6b9bda46
- fhold=fbase.ForecastingHorizon(ytest.index.to_period(freq="5Min"), is_relative=false)
-
-# ╔═╡ 3ddd863e-b821-44ef-aa56-54ec5f7f8410
-fhold.to_relative(cutoff=ytrain.index[-1])
-
-# ╔═╡ 01beb782-41af-4457-b53e-e0a166017136
-
+#fhold=fh = np.array([1])
+fhold=fbase.ForecastingHorizon(ytest.index, is_relative=false)
 
 # ╔═╡ e3cfdc65-fbb1-4021-8672-1b494c56237f
 forecast_model = naivemodel.NaiveForecaster(strategy="last", sp=12)
@@ -127,17 +116,17 @@ forecast_model = naivemodel.NaiveForecaster(strategy="last", sp=12)
 # ╔═╡ 17a4f704-8a18-4f90-bb87-3b0ce480bc21
 forecast_model.fit(ytrain)
 
+# ╔═╡ a8638760-da82-400f-bb85-62b749d66066
+forecaster = naivemodel.NaiveForecaster(strategy="drift")
+
+# ╔═╡ b3cfde8d-27fe-43b9-a4c0-2ae3fc9dbee1
+forecaster.fit(tst)
+
 # ╔═╡ 547ea00d-5794-4fda-9aac-0ff4ad249a53
 y_pred = forecast_model.predict(fhold)
 
 # ╔═╡ 98e0f1a4-62eb-4371-8349-370f531e9dfd
 
-
-# ╔═╡ 97469764-b8ce-4969-9301-bb5f638b5588
-
-
-# ╔═╡ 414fddee-2599-4517-a961-069afaece0c9
-fh
 
 # ╔═╡ 00000000-0000-0000-0000-000000000001
 PLUTO_PROJECT_TOML_CONTENTS = """
@@ -1140,16 +1129,12 @@ version = "0.9.1+5"
 # ╠═08f78d80-a827-4222-8c7e-e01d1817fbf9
 # ╠═2064872a-59da-4f70-a463-6650b88c2f02
 # ╠═90a24d40-ecf3-428e-a840-9363ec414744
-# ╠═89da4924-32f0-4206-b6b8-1be92e691c24
-# ╠═47c63d97-4286-4192-aee7-eff7d02ae522
 # ╠═6b000309-7fe4-4c56-93d3-c88a6b9bda46
-# ╠═3ddd863e-b821-44ef-aa56-54ec5f7f8410
-# ╠═01beb782-41af-4457-b53e-e0a166017136
 # ╠═e3cfdc65-fbb1-4021-8672-1b494c56237f
 # ╠═17a4f704-8a18-4f90-bb87-3b0ce480bc21
+# ╠═a8638760-da82-400f-bb85-62b749d66066
+# ╠═b3cfde8d-27fe-43b9-a4c0-2ae3fc9dbee1
 # ╠═547ea00d-5794-4fda-9aac-0ff4ad249a53
 # ╠═98e0f1a4-62eb-4371-8349-370f531e9dfd
-# ╠═97469764-b8ce-4969-9301-bb5f638b5588
-# ╠═414fddee-2599-4517-a961-069afaece0c9
 # ╟─00000000-0000-0000-0000-000000000001
 # ╟─00000000-0000-0000-0000-000000000002
