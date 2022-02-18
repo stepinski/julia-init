@@ -111,22 +111,22 @@ ytrain,ytest = tselect.temporal_train_test_split(tst,test_size=8000)
 fhold=fbase.ForecastingHorizon(ytest.index, is_relative=false)
 
 # ╔═╡ e3cfdc65-fbb1-4021-8672-1b494c56237f
-forecast_model = naivemodel.NaiveForecaster(strategy="last", sp=12)
+forecast_model = naivemodel.NaiveForecaster(strategy="mean", sp=12)
 
 # ╔═╡ 17a4f704-8a18-4f90-bb87-3b0ce480bc21
 forecast_model.fit(ytrain)
-
-# ╔═╡ a8638760-da82-400f-bb85-62b749d66066
-forecaster = naivemodel.NaiveForecaster(strategy="drift")
-
-# ╔═╡ b3cfde8d-27fe-43b9-a4c0-2ae3fc9dbee1
-forecaster.fit(tst)
 
 # ╔═╡ 547ea00d-5794-4fda-9aac-0ff4ad249a53
 y_pred = forecast_model.predict(fhold)
 
 # ╔═╡ 98e0f1a4-62eb-4371-8349-370f531e9dfd
+tm=convert(Array{DateTime},y_pred.index)
 
+# ╔═╡ ed175420-80dd-443c-95b5-0eedde077eeb
+vals=y_pred.values
+
+# ╔═╡ e2043f11-20dc-48ac-8748-f315ba26b6da
+plot(first(tm,100),first(vals,100))
 
 # ╔═╡ 00000000-0000-0000-0000-000000000001
 PLUTO_PROJECT_TOML_CONTENTS = """
@@ -1132,9 +1132,9 @@ version = "0.9.1+5"
 # ╠═6b000309-7fe4-4c56-93d3-c88a6b9bda46
 # ╠═e3cfdc65-fbb1-4021-8672-1b494c56237f
 # ╠═17a4f704-8a18-4f90-bb87-3b0ce480bc21
-# ╠═a8638760-da82-400f-bb85-62b749d66066
-# ╠═b3cfde8d-27fe-43b9-a4c0-2ae3fc9dbee1
 # ╠═547ea00d-5794-4fda-9aac-0ff4ad249a53
 # ╠═98e0f1a4-62eb-4371-8349-370f531e9dfd
+# ╠═ed175420-80dd-443c-95b5-0eedde077eeb
+# ╠═e2043f11-20dc-48ac-8748-f315ba26b6da
 # ╟─00000000-0000-0000-0000-000000000001
 # ╟─00000000-0000-0000-0000-000000000002
