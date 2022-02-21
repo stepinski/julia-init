@@ -128,6 +128,37 @@ vals=y_pred.values
 # ╔═╡ e2043f11-20dc-48ac-8748-f315ba26b6da
 plot(first(tm,100),first(vals,100))
 
+# ╔═╡ ea23da82-5488-4697-a5d4-f1f3d9cc4a46
+begin
+	metrics = pyimport("sktime.performance_metrics.forecasting")
+	bats = pyimport("sktime.forecasting.bats")
+	#from sktime.performance_metrics.forecasting import mean_absolute_percentage_error
+end
+
+# ╔═╡ 8079c0b1-0ce5-40d5-a563-1793a1b59e27
+
+
+# ╔═╡ 8a758c68-8ebd-4f7c-b790-9449021cac95
+mape=metrics.mean_absolute_percentage_error(ytest, y_pred)
+
+# ╔═╡ bf25e1e7-1de2-40e4-ba98-34e82a4d964b
+forecaster2 = bats.BATS(sp=12, use_trend=true, use_box_cox=false)
+
+# ╔═╡ 8399992c-6ae6-4557-87e6-a9fd1535cbbc
+
+
+# ╔═╡ 3e938b2d-2b63-45b7-bb1e-7029a946a0f2
+forecaster.fit(y_train)
+y_pred = forecaster.predict(fh)
+plot_series(y_train, y_test, y_pred, labels=["y_train", "y_test", "y_pred"])
+mean_absolute_percentage_error(y_pred, y_test)
+
+# ╔═╡ a7caae76-4be1-412f-86c3-9a5041f5750c
+
+
+# ╔═╡ d4b9d103-fa79-4705-ae93-d1f1fe1387dd
+
+
 # ╔═╡ 00000000-0000-0000-0000-000000000001
 PLUTO_PROJECT_TOML_CONTENTS = """
 [deps]
@@ -1136,5 +1167,13 @@ version = "0.9.1+5"
 # ╠═98e0f1a4-62eb-4371-8349-370f531e9dfd
 # ╠═ed175420-80dd-443c-95b5-0eedde077eeb
 # ╠═e2043f11-20dc-48ac-8748-f315ba26b6da
+# ╠═ea23da82-5488-4697-a5d4-f1f3d9cc4a46
+# ╠═8079c0b1-0ce5-40d5-a563-1793a1b59e27
+# ╠═8a758c68-8ebd-4f7c-b790-9449021cac95
+# ╠═bf25e1e7-1de2-40e4-ba98-34e82a4d964b
+# ╠═8399992c-6ae6-4557-87e6-a9fd1535cbbc
+# ╠═3e938b2d-2b63-45b7-bb1e-7029a946a0f2
+# ╠═a7caae76-4be1-412f-86c3-9a5041f5750c
+# ╠═d4b9d103-fa79-4705-ae93-d1f1fe1387dd
 # ╟─00000000-0000-0000-0000-000000000001
 # ╟─00000000-0000-0000-0000-000000000002
