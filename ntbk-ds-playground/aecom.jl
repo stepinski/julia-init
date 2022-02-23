@@ -132,17 +132,35 @@ plot(first(tm,100),first(vals,100))
 begin
 	metrics = pyimport("sktime.performance_metrics.forecasting")
 	
-	#bats = pyimport("sktime.forecasting.bats")
+	smoothing= pyimport("sktime.forecasting.exp_smoothing")
 	#from sktime.performance_metrics.forecasting import mean_absolute_percentage_error
 end
 
 # ╔═╡ 8a758c68-8ebd-4f7c-b790-9449021cac95
 mape=metrics.mean_absolute_percentage_error(ytest, y_pred)
 
-# ╔═╡ bf25e1e7-1de2-40e4-ba98-34e82a4d964b
-forecaster2 = bats.BATS(sp=12, use_trend=true, use_box_cox=false)
+# ╔═╡ d8aa2bac-33a4-4f4c-82c8-070d4a84283d
+forecaster2 = smoothing.ExponentialSmoothing(trend="add", seasonal="additive", sp=12)
+
+# ╔═╡ 1e46a760-2996-40e0-bc7b-be17bab9a4ee
+ypre=convert(Array{DateTime},ytrain.index)
 
 # ╔═╡ 8399992c-6ae6-4557-87e6-a9fd1535cbbc
+begin
+forecaster2.fit(ytrain)
+y_pred2 = forecaster2.predict(fhold)
+end
+
+# ╔═╡ d48027cf-ecdc-438b-9a2a-2b8d5ad00d4e
+ytvals=convert(Array{Float64},ytrain.values)
+
+# ╔═╡ 351d440f-77aa-4da4-8589-94b3a03fa635
+
+
+# ╔═╡ 1640f996-9d57-4d44-90bd-86e19d21c725
+
+
+# ╔═╡ 50a16ba4-dcbe-4139-bb71-dd74a8fa753f
 
 
 # ╔═╡ 3e938b2d-2b63-45b7-bb1e-7029a946a0f2
@@ -156,6 +174,18 @@ mean_absolute_percentage_error(y_pred, y_test)
 
 # ╔═╡ d4b9d103-fa79-4705-ae93-d1f1fe1387dd
 
+
+# ╔═╡ eb8d7155-ef0a-4802-8104-437ba854f9fc
+resplot=plot(last(ypre,100),last(ytvals,100))
+
+# ╔═╡ 39a7e0d3-cbc9-4cc0-8726-9985f09abf84
+begin
+
+resplot=plot!(first(tm,100),first(ytest,100))
+resplot=plot!(first(y_pred2,100),first(y_pred2,100))
+#plot_series(ytrain, ytest, y_pred2, labels=["y_train", "y_test", "y_pred"])
+mean_absolute_percentage_error(y_pred2, ytest)
+end
 
 # ╔═╡ 00000000-0000-0000-0000-000000000001
 PLUTO_PROJECT_TOML_CONTENTS = """
@@ -1167,8 +1197,15 @@ version = "0.9.1+5"
 # ╠═e2043f11-20dc-48ac-8748-f315ba26b6da
 # ╠═ea23da82-5488-4697-a5d4-f1f3d9cc4a46
 # ╠═8a758c68-8ebd-4f7c-b790-9449021cac95
-# ╠═bf25e1e7-1de2-40e4-ba98-34e82a4d964b
+# ╠═d8aa2bac-33a4-4f4c-82c8-070d4a84283d
+# ╠═1e46a760-2996-40e0-bc7b-be17bab9a4ee
 # ╠═8399992c-6ae6-4557-87e6-a9fd1535cbbc
+# ╠═d48027cf-ecdc-438b-9a2a-2b8d5ad00d4e
+# ╠═eb8d7155-ef0a-4802-8104-437ba854f9fc
+# ╠═351d440f-77aa-4da4-8589-94b3a03fa635
+# ╠═1640f996-9d57-4d44-90bd-86e19d21c725
+# ╠═39a7e0d3-cbc9-4cc0-8726-9985f09abf84
+# ╠═50a16ba4-dcbe-4139-bb71-dd74a8fa753f
 # ╠═3e938b2d-2b63-45b7-bb1e-7029a946a0f2
 # ╠═a7caae76-4be1-412f-86c3-9a5041f5750c
 # ╠═d4b9d103-fa79-4705-ae93-d1f1fe1387dd
