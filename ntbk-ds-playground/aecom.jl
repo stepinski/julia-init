@@ -131,7 +131,7 @@ plot(first(tm,100),first(vals,100))
 # ╔═╡ ea23da82-5488-4697-a5d4-f1f3d9cc4a46
 begin
 	metrics = pyimport("sktime.performance_metrics.forecasting")
-	
+	autoe=pyimport("sktime.forecasting.ets")
 	smoothing= pyimport("sktime.forecasting.exp_smoothing")
 	#from sktime.performance_metrics.forecasting import mean_absolute_percentage_error
 end
@@ -154,38 +154,29 @@ end
 # ╔═╡ d48027cf-ecdc-438b-9a2a-2b8d5ad00d4e
 ytvals=convert(Array{Float64},ytrain.values)
 
-# ╔═╡ 351d440f-77aa-4da4-8589-94b3a03fa635
-
-
-# ╔═╡ 1640f996-9d57-4d44-90bd-86e19d21c725
-
-
-# ╔═╡ 50a16ba4-dcbe-4139-bb71-dd74a8fa753f
-
-
-# ╔═╡ 3e938b2d-2b63-45b7-bb1e-7029a946a0f2
-forecaster.fit(y_train)
-y_pred = forecaster.predict(fh)
-plot_series(y_train, y_test, y_pred, labels=["y_train", "y_test", "y_pred"])
-mean_absolute_percentage_error(y_pred, y_test)
-
-# ╔═╡ a7caae76-4be1-412f-86c3-9a5041f5750c
-
-
-# ╔═╡ d4b9d103-fa79-4705-ae93-d1f1fe1387dd
-
-
 # ╔═╡ eb8d7155-ef0a-4802-8104-437ba854f9fc
 resplot=plot(last(ypre,100),last(ytvals,100))
 
 # ╔═╡ 39a7e0d3-cbc9-4cc0-8726-9985f09abf84
 begin
 
-resplot=plot!(first(tm,100),first(ytest,100))
-resplot=plot!(first(y_pred2,100),first(y_pred2,100))
+resplot1=plot!(first(tm,20),first(ytest,20))
+resplot2=plot!(first(ypre,20),first(y_pred2,20))
 #plot_series(ytrain, ytest, y_pred2, labels=["y_train", "y_test", "y_pred"])
-mean_absolute_percentage_error(y_pred2, ytest)
+#mean_absolute_percentage_error(y_pred2, ytest)
 end
+
+# ╔═╡ 7a9ac244-fc0b-4fe2-a475-e77f8e382b67
+forecasterets = autoe.AutoETS(auto=true, sp=12, n_jobs=-1)
+
+# ╔═╡ c957c794-1d42-46af-942f-b3c835d27e93
+begin
+forecasterets.fit(ytrain)
+y_preda = forecasterets.predict(fhold)
+end
+
+# ╔═╡ a7caae76-4be1-412f-86c3-9a5041f5750c
+metrics.mean_absolute_percentage_error(y_preda, ytest)
 
 # ╔═╡ 00000000-0000-0000-0000-000000000001
 PLUTO_PROJECT_TOML_CONTENTS = """
@@ -1202,12 +1193,9 @@ version = "0.9.1+5"
 # ╠═8399992c-6ae6-4557-87e6-a9fd1535cbbc
 # ╠═d48027cf-ecdc-438b-9a2a-2b8d5ad00d4e
 # ╠═eb8d7155-ef0a-4802-8104-437ba854f9fc
-# ╠═351d440f-77aa-4da4-8589-94b3a03fa635
-# ╠═1640f996-9d57-4d44-90bd-86e19d21c725
 # ╠═39a7e0d3-cbc9-4cc0-8726-9985f09abf84
-# ╠═50a16ba4-dcbe-4139-bb71-dd74a8fa753f
-# ╠═3e938b2d-2b63-45b7-bb1e-7029a946a0f2
+# ╠═7a9ac244-fc0b-4fe2-a475-e77f8e382b67
+# ╠═c957c794-1d42-46af-942f-b3c835d27e93
 # ╠═a7caae76-4be1-412f-86c3-9a5041f5750c
-# ╠═d4b9d103-fa79-4705-ae93-d1f1fe1387dd
 # ╟─00000000-0000-0000-0000-000000000001
 # ╟─00000000-0000-0000-0000-000000000002
