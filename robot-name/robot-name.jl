@@ -6,7 +6,7 @@ mutable struct Robot
 end
 
 function reset!(instance::Robot)
-
+    instance.pname=""
 end
 
 function name(instance::Robot) 
