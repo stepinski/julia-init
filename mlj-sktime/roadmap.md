@@ -34,10 +34,7 @@ in contributing to MLJ.
 
 ### Priorities
 
-Priorities are somewhat fluid, depending on funding offers and
-available talent. Rough priorities for the core development team at
-present are marked with **†** below. However, we are always keen to
-review external contributions in any area.
+implement empty interface to mlj
 
 ## Future enhancements
 
