@@ -1,10 +1,13 @@
 using Random
+# const history = Set{String}()
+
 mutable struct Robot
      pname::String 
+     history::Set{String}
     # # obj::Robot
     #  Robot() = (x = new();x.pname="")
     function Robot()
-        return new("")
+        return new("",Set{String}())
     end
 end
 
@@ -12,10 +15,24 @@ function reset!(instance::Robot)
     instance.pname=""
 end
 
+function generate_name(history)
+    nname=""
+    nih=true
+    while (nih)
+        Random.seed!( rand(1:100000) )
+        nname = randstring('A':'Z', 2) * randstring('0':'9', 3)
+        nih=in(nname, history)
+    end
+    push!(history, nname)
+    return nname
+end
+
 function name(instance::Robot) 
     # print(instance.pname)
     # print(randstring('A':'Z', 2) * randstring('0':'9', 3) )
-    instance.pname = length(instance.pname)==0 ? randstring('A':'Z', 2) * randstring('0':'9', 3) : instance.pname
+    
+    instance.pname = length(instance.pname)==0 ?  generate_name(instance.history) : instance.pname
+   
     # print(instance.pname)
     return instance.pname
 end
