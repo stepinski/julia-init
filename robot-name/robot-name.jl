@@ -18,10 +18,12 @@ end
 function generate_name()
     nname=""
     nih=true
-    while (nih)
-        Random.seed!( rand(1:100000) )
-        nname = randstring('A':'Z', 2) * randstring('0':'9', 3)
-        nih=in(nname, history_set)
+    genn()=randstring('A':'Z', 2) * randstring('0':'9', 3)
+    nname=genn()
+    while (in(nname, history_set))
+        # Random.seed!( rand(1:100000) )
+        nname = genn()
+        # nih=in(nname, history_set)
     end
     push!(history_set, nname)
     return nname
