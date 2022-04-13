@@ -1,9 +1,10 @@
 function allergic_to(score, allergen)
-
+    return allergen in allergy_list(score)
 end
 
 function allergy_list(score)
-    vals=Dict( 1 => "eggs", 2=>"peanuts"  , 4=>"shellfish"  , 8=>"strawberries"  , 16=>"tomatoes", 32=>"chocolate" , 64=>"pollen" , 128=>"cats")
-    return Set([vals[score]])
-    
+    bits=digits(score%256, base=2, pad=8) |> reverse
+    bitc= !=(0).(bits)
+    vals=["eggs","peanuts","shellfish","strawberries","tomatoes","chocolate","pollen","cats"] |> reverse
+    return Set(vals[bitc])
 end
